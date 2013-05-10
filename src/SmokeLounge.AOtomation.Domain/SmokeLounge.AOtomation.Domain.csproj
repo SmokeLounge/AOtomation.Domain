@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DDD937B1-17AB-4366-8AA8-15041BCBD64A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmokeLounge.AOtomation.Domain</RootNamespace>
+    <AssemblyName>SmokeLounge.AOtomation.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseOutputPath>$(SolutionDir)\..\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)\..\obj\</BaseIntermediateOutputPath>
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>$(BaseOutputPath)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <DocumentationFile>..\..\bin\Debug\SmokeLounge.AOtomation.Domain.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>$(BaseOutputPath)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>TRACE;CONTRACTS_FULL</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsRuntimeCheckingLevel>ReleaseRequires</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <DocumentationFile>..\..\bin\Release\SmokeLounge.AOtomation.Domain.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\SmokeLounge.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="CommandHandlers\AttachClientToRemoteProcessCommandHandler.cs" />
+    <Compile Include="CommandHandlers\FindPlayerForRemoteProcessCommandHandler.cs" />
+    <Compile Include="CommandHandlers\AddMessageTriggerToProcessCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateRemoteProcessCommandHandler.cs" />
+    <Compile Include="CommandHandlers\DeleteRemoteProcessCommandHandler.cs" />
+    <Compile Include="Entities\ClientCredentials.cs" />
+    <Compile Include="Entities\IProcess.cs" />
+    <Compile Include="Entities\Process.cs" />
+    <Compile Include="Entities\Triggers\HandleMessageTrigger.cs" />
+    <Compile Include="Entities\Triggers\IHandleTrigger.cs" />
+    <Compile Include="Entities\Actions\GameAction.cs" />
+    <Compile Include="Entities\Triggers\ChainTriggerHandlers.cs" />
+    <Compile Include="Entities\Triggers\IChainTriggerHandlers.cs" />
+    <Compile Include="Entities\Triggers\ActionExecutionContext.cs" />
+    <Compile Include="Entities\Actions\IGameAction.cs" />
+    <Compile Include="Entities\Triggers\IActionExecutionContext.cs" />
+    <Compile Include="Entities\Actions\ISendMessageAction.cs" />
+    <Compile Include="Entities\Triggers\ITrigger.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\Triggers\MessageTrigger.cs" />
+    <Compile Include="Entities\ClientConnection.cs" />
+    <Compile Include="Entities\IPlayer.cs" />
+    <Compile Include="Entities\IClient.cs" />
+    <Compile Include="Entities\Triggers\IMessageTrigger.cs" />
+    <Compile Include="Entities\IClientConnection.cs" />
+    <Compile Include="Entities\IRemoteProcess.cs" />
+    <Compile Include="Entities\RemoteProcess.cs" />
+    <Compile Include="Entities\Actions\SendMessageAction.cs" />
+    <Compile Include="Entities\Triggers\Trigger.cs" />
+    <Compile Include="EventHandlers\RemoteProcessCreatedEventHandler.cs" />
+    <Compile Include="EventHandlers\PlayerForRemoteProcessFoundEventHandler.cs" />
+    <Compile Include="EventHandlers\ClientAttachedToProcessEventHandler.cs" />
+    <Compile Include="EventHandlers\MessageTriggerAddedToRemoteProcessEvent.cs" />
+    <Compile Include="Factories\ActionExecutionContextFactory.cs" />
+    <Compile Include="Factories\IActionExecutionContextFactory.cs" />
+    <Compile Include="Factories\IProcessFactory.cs" />
+    <Compile Include="Factories\ISendMessageActionFactory.cs" />
+    <Compile Include="Factories\PlayerFactory.cs" />
+    <Compile Include="Factories\IPlayerFactory.cs" />
+    <Compile Include="Factories\MessageTriggerFactory.cs" />
+    <Compile Include="Factories\ClientFactory.cs" />
+    <Compile Include="Factories\ClientConnectionFactory.cs" />
+    <Compile Include="Factories\IMessageTriggerFactory.cs" />
+    <Compile Include="Factories\IClientFactory.cs" />
+    <Compile Include="Factories\IClientConnectionFactory.cs" />
+    <Compile Include="Factories\SendMessageActionFactory.cs" />
+    <Compile Include="Infrastructure\CommandManager.cs" />
+    <Compile Include="Infrastructure\DomainEventAggregator.cs" />
+    <Compile Include="EventHandlers\RemoteProcessDeletedEventHandler.cs" />
+    <Compile Include="Factories\IRemoteProcessFactory.cs" />
+    <Compile Include="Factories\RemoteProcessFactory.cs" />
+    <Compile Include="Infrastructure\ExportCommandHandlerAttribute.cs" />
+    <Compile Include="Infrastructure\ExportEventHandlerAttribute.cs" />
+    <Compile Include="Infrastructure\ExportStartupTaskAttribute.cs" />
+    <Compile Include="Infrastructure\ICommandHandler.cs" />
+    <Compile Include="Infrastructure\ICommandHandlerMetadata.cs" />
+    <Compile Include="Infrastructure\ICommandManager.cs" />
+    <Compile Include="Infrastructure\IEventHandlerMetadata.cs" />
+    <Compile Include="Infrastructure\IStartupTaskMetadata.cs" />
+    <Compile Include="Interoperability\IMemoryManager.cs" />
+    <Compile Include="Interoperability\IMessageSerializer.cs" />
+    <Compile Include="Interoperability\MemoryManager.cs" />
+    <Compile Include="Interoperability\MemoryMap.cs" />
+    <Compile Include="Interoperability\MemoryMaps.cs" />
+    <Compile Include="Interoperability\MessageSerializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IProcessRepository.cs" />
+    <Compile Include="Repositories\PlayerRepository.cs" />
+    <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\IPlayerRepository.cs" />
+    <Compile Include="Repositories\IClientRepository.cs" />
+    <Compile Include="Repositories\ProcessRepository.cs" />
+    <Compile Include="Repositories\TriggerRepository.cs" />
+    <Compile Include="Repositories\ITriggerRepository.cs" />
+    <Compile Include="Repositories\IRemoteProcessRepository.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Repositories\RemoteProcessRepository.cs" />
+    <Compile Include="Infrastructure\IBackgroundTask.cs" />
+    <Compile Include="Tasks\IInitializeEventHandlersTask.cs" />
+    <Compile Include="Tasks\InitializeEventHandlersTask.cs" />
+    <Compile Include="Infrastructure\ITask.cs" />
+    <Compile Include="Tasks\IRemoteProcessMonitorTask.cs" />
+    <Compile Include="Tasks\RemoteProcessMonitorTask.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SmokeLounge.AOtomation.Common\SmokeLounge.AOtomation.Common.csproj">
+      <Project>{772F2183-7F21-46E1-99F0-3C26811D5BC8}</Project>
+      <Name>SmokeLounge.AOtomation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmokeLounge.AOtomation.Domain.Interfaces\SmokeLounge.AOtomation.Domain.Interfaces.csproj">
+      <Project>{f7accfa0-a898-444b-abfa-5a920945f52b}</Project>
+      <Name>SmokeLounge.AOtomation.Domain.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\SmokeLounge.AOtomation.Messaging\src\SmokeLounge.AOtomation.Messaging\SmokeLounge.AOtomation.Messaging.csproj">
+      <Project>{3ceac898-bfca-45ea-bf34-c4bbb85d2da4}</Project>
+      <Name>SmokeLounge.AOtomation.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\SmokeLounge.AOtomation.Hook\src\SmokeLounge.AOtomation.Hook\SmokeLounge.AOtomation.Hook.csproj">
+      <Project>{644c7d10-ddd2-4dd5-bf98-ade288f611be}</Project>
+      <Name>SmokeLounge.AOtomation.Hook</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
