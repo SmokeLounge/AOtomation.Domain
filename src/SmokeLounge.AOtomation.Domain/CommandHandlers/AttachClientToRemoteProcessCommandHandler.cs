@@ -23,7 +23,6 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
     using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Domain.Interfaces.Commands;
     using SmokeLounge.AOtomation.Domain.Repositories;
-    using SmokeLounge.AOtomation.Hook;
 
     [ExportCommandHandler(typeof(AttachClientToRemoteProcessCommand))]
     public class AttachClientToRemoteProcessCommandHandler : ICommandHandler<AttachClientToRemoteProcessCommand>
@@ -31,8 +30,6 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
         #region Fields
 
         private readonly IClientFactory clientFactory;
-
-        private readonly IInjectLibrary injectLibrary;
 
         private readonly IRemoteProcessRepository remoteProcessRepository;
 
@@ -42,12 +39,11 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
 
         [ImportingConstructor]
         public AttachClientToRemoteProcessCommandHandler(
-            IInjectLibrary injectLibrary, IClientFactory clientFactory, IRemoteProcessRepository remoteProcessRepository)
+            IClientFactory clientFactory, IRemoteProcessRepository remoteProcessRepository)
         {
-            Contract.Requires<ArgumentNullException>(injectLibrary != null);
             Contract.Requires<ArgumentNullException>(clientFactory != null);
             Contract.Requires<ArgumentNullException>(remoteProcessRepository != null);
-            this.injectLibrary = injectLibrary;
+
             this.clientFactory = clientFactory;
             this.remoteProcessRepository = remoteProcessRepository;
         }
@@ -64,8 +60,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
                 return;
             }
 
-            var serverId = this.injectLibrary.InjectToProcess(remoteProcess.Handle);
-            var client = this.clientFactory.Create(remoteProcess.RemoteId, remoteProcess.Handle, serverId);
+            var client = this.clientFactory.Create(remoteProcess.RemoteId);
             remoteProcess.AttachClient(client);
         }
 
@@ -81,7 +76,6 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(this.injectLibrary != null);
             Contract.Invariant(this.clientFactory != null);
             Contract.Invariant(this.remoteProcessRepository != null);
         }

@@ -20,6 +20,7 @@ namespace SmokeLounge.AOtomation.Domain.Factories
 
     using SmokeLounge.AOtomation.Domain.Entities;
     using SmokeLounge.AOtomation.Domain.Interoperability;
+    using SmokeLounge.AOtomation.Hook;
 
     [Export(typeof(IClientFactory))]
     public class ClientFactory : IClientFactory
@@ -39,6 +40,7 @@ namespace SmokeLounge.AOtomation.Domain.Factories
         {
             Contract.Requires<ArgumentNullException>(clientConnectionFactory != null);
             Contract.Requires<ArgumentNullException>(messageSerializer != null);
+
             this.clientConnectionFactory = clientConnectionFactory;
             this.messageSerializer = messageSerializer;
         }
@@ -47,9 +49,9 @@ namespace SmokeLounge.AOtomation.Domain.Factories
 
         #region Public Methods and Operators
 
-        public IClient Create(int remoteProcessId, IntPtr remoteProcessHandle, IntPtr serverId)
+        public IClient Create(int remoteProcessId)
         {
-            var clientConnection = this.clientConnectionFactory.Create(remoteProcessId, remoteProcessHandle);
+            var clientConnection = this.clientConnectionFactory.Create(remoteProcessId);
             return new Client(clientConnection, this.messageSerializer);
         }
 

@@ -20,6 +20,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
     using System.Text;
 
     using SmokeLounge.AOtomation.Domain.Interoperability;
+    using SmokeLounge.AOtomation.Hook;
     using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Messages;
 

@@ -24,7 +24,7 @@ namespace SmokeLounge.AOtomation.Domain.Factories
     {
         #region Public Methods and Operators
 
-        IClient Create(int remoteProcessId, IntPtr remoteProcessHandle, IntPtr serverId);
+        IClient Create(int remoteProcessId);
 
         #endregion
     }
@@ -34,7 +34,7 @@ namespace SmokeLounge.AOtomation.Domain.Factories
     {
         #region Public Methods and Operators
 
-        public IClient Create(int remoteProcessId, IntPtr remoteProcessHandle, IntPtr serverId)
+        public IClient Create(int remoteProcessId)
         {
             Contract.Ensures(Contract.Result<IClient>() != null);
 

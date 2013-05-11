@@ -147,11 +147,9 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Triggers\MessageTrigger.cs" />
-    <Compile Include="Entities\ClientConnection.cs" />
     <Compile Include="Entities\IPlayer.cs" />
     <Compile Include="Entities\IClient.cs" />
     <Compile Include="Entities\Triggers\IMessageTrigger.cs" />
-    <Compile Include="Entities\IClientConnection.cs" />
     <Compile Include="Entities\IRemoteProcess.cs" />
     <Compile Include="Entities\RemoteProcess.cs" />
     <Compile Include="Entities\Actions\SendMessageAction.cs" />
@@ -167,10 +165,8 @@
     <Compile Include="Factories\IPlayerFactory.cs" />
     <Compile Include="Factories\MessageTriggerFactory.cs" />
     <Compile Include="Factories\ClientFactory.cs" />
-    <Compile Include="Factories\ClientConnectionFactory.cs" />
     <Compile Include="Factories\IMessageTriggerFactory.cs" />
     <Compile Include="Factories\IClientFactory.cs" />
-    <Compile Include="Factories\IClientConnectionFactory.cs" />
     <Compile Include="Factories\SendMessageActionFactory.cs" />
     <Compile Include="Infrastructure\CommandManager.cs" />
     <Compile Include="Infrastructure\DomainEventAggregator.cs" />
@@ -194,9 +190,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IProcessRepository.cs" />
     <Compile Include="Repositories\PlayerRepository.cs" />
-    <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\IPlayerRepository.cs" />
-    <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\ProcessRepository.cs" />
     <Compile Include="Repositories\TriggerRepository.cs" />
     <Compile Include="Repositories\ITriggerRepository.cs" />
