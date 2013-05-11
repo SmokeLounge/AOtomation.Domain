@@ -53,7 +53,7 @@ namespace SmokeLounge.AOtomation.Domain.Facade
         #region Methods
 
         [ContractInvariantMethod]
-        private void Invariant()
+        private void ObjectInvariant()
         {
             Contract.Invariant(this.commandManager != null);
         }

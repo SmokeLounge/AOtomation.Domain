@@ -132,7 +132,6 @@
     <Compile Include="CommandHandlers\AddMessageTriggerToProcessCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateRemoteProcessCommandHandler.cs" />
     <Compile Include="CommandHandlers\DeleteRemoteProcessCommandHandler.cs" />
-    <Compile Include="Entities\ClientCredentials.cs" />
     <Compile Include="Entities\IProcess.cs" />
     <Compile Include="Entities\Process.cs" />
     <Compile Include="Entities\Triggers\HandleMessageTrigger.cs" />
@@ -163,7 +162,6 @@
     <Compile Include="EventHandlers\MessageTriggerAddedToRemoteProcessEvent.cs" />
     <Compile Include="Factories\ActionExecutionContextFactory.cs" />
     <Compile Include="Factories\IActionExecutionContextFactory.cs" />
-    <Compile Include="Factories\IProcessFactory.cs" />
     <Compile Include="Factories\ISendMessageActionFactory.cs" />
     <Compile Include="Factories\PlayerFactory.cs" />
     <Compile Include="Factories\IPlayerFactory.cs" />
