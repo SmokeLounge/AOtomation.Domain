@@ -54,6 +54,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
             Contract.Requires<ArgumentNullException>(remoteProcessRepository != null);
             Contract.Requires<ArgumentNullException>(memoryManager != null);
             Contract.Requires<ArgumentNullException>(playerFactory != null);
+
             this.playerRepository = playerRepository;
             this.remoteProcessRepository = remoteProcessRepository;
             this.memoryManager = memoryManager;

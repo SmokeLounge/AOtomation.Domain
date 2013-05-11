@@ -47,7 +47,6 @@ namespace SmokeLounge.AOtomation.Domain.EventHandlers
 
         public void Handle(RemoteProcessCreatedEvent message)
         {
-            this.commandManager.Enqueue(new AttachClientToRemoteProcessCommand(message.RemoteProcessId));
             this.commandManager.Enqueue(new FindPlayerForRemoteProcessCommand(message.RemoteProcessId));
         }
 

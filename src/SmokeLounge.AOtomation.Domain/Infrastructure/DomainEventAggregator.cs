@@ -42,17 +42,7 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
 
         private readonly List<Handler> handlers = new List<Handler>();
 
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="DomainEventAggregator" /> class.
-        /// </summary>
-        public DomainEventAggregator()
-        {
-            this.PublicationThreadMarshaller = DefaultPublicationThreadMarshaller;
-        }
+        private Action<Action> publicationThreadMarshaller = DefaultPublicationThreadMarshaller;
 
         #endregion
 
@@ -62,7 +52,18 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
         ///     Gets or sets the default publication thread marshaller.
         /// </summary>
         /// <value> The default publication thread marshaller. </value>
-        public Action<Action> PublicationThreadMarshaller { get; set; }
+        public Action<Action> PublicationThreadMarshaller
+        {
+            get
+            {
+                return this.publicationThreadMarshaller;
+            }
+
+            set
+            {
+                this.publicationThreadMarshaller = value;
+            }
+        }
 
         #endregion
 
@@ -197,7 +198,7 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
                 {
                     Contract.Assume(@interface != null);
                     var gerenicArguments = @interface.GetGenericArguments();
-                    Contract.Assume(gerenicArguments.Count() > 0);
+                    Contract.Assume(gerenicArguments.Any());
                     var type = gerenicArguments.First();
                     var method = @interface.GetMethod("Handle");
                     this.supportedHandlers[type] = method;
