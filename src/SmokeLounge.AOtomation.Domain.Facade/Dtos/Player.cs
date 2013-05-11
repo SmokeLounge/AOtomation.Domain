@@ -14,6 +14,10 @@
 
 namespace SmokeLounge.AOtomation.Domain.Facade.Dtos
 {
+    using System;
+
+    using SmokeLounge.AOtomation.Messaging.GameData;
+
     public class Player
     {
         #region Constructors and Destructors
@@ -26,7 +30,11 @@ namespace SmokeLounge.AOtomation.Domain.Facade.Dtos
 
         #region Public Properties
 
+        public Guid Id { get; private set; }
+
         public string Name { get; private set; }
+
+        public Identity RemoteId { get; private set; }
 
         #endregion
     }

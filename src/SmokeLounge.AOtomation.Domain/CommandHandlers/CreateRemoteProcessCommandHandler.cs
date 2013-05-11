@@ -54,6 +54,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
             Contract.Requires<ArgumentNullException>(win32ProcessRepository != null);
             Contract.Requires<ArgumentNullException>(remoteProcessFactory != null);
             Contract.Requires<ArgumentNullException>(remoteProcessRepository != null);
+
             this.events = events;
             this.win32ProcessRepository = win32ProcessRepository;
             this.remoteProcessFactory = remoteProcessFactory;

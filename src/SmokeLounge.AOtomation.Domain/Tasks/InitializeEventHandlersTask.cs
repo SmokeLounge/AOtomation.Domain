@@ -43,6 +43,7 @@ namespace SmokeLounge.AOtomation.Domain.Tasks
         {
             Contract.Requires<ArgumentNullException>(events != null);
             Contract.Requires<ArgumentNullException>(eventHandlers != null);
+
             this.events = events;
             this.eventHandlers = eventHandlers;
         }

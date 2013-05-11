@@ -27,7 +27,7 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
     {
         #region Fields
 
-        private readonly IDictionary<Type, Lazy<ICommandHandler>> commandHandlers;
+        private readonly IDictionary<Type, ICommandHandler> commandHandlers;
 
         #endregion
 
@@ -37,12 +37,12 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
         public CommandManager([ImportMany] IEnumerable<Lazy<ICommandHandler, ICommandHandlerMetadata>> commandHandlers)
         {
             Contract.Requires<ArgumentNullException>(commandHandlers != null);
-            this.commandHandlers = new Dictionary<Type, Lazy<ICommandHandler>>();
+            this.commandHandlers = new Dictionary<Type, ICommandHandler>();
             foreach (var commandHandler in commandHandlers)
             {
                 Contract.Assume(commandHandler != null);
                 Contract.Assume(commandHandler.Metadata != null);
-                this.commandHandlers.Add(commandHandler.Metadata.HandlesCommand, commandHandler);
+                this.commandHandlers.Add(commandHandler.Metadata.HandlesCommand, commandHandler.Value);
             }
         }
 
@@ -52,13 +52,13 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
 
         public void Enqueue(ICommand command)
         {
-            Lazy<ICommandHandler> commandHandler;
+            ICommandHandler commandHandler;
             if (this.commandHandlers.TryGetValue(command.GetType(), out commandHandler) == false)
             {
                 return;
             }
 
-            Task.Run(() => commandHandler.Value.Handle(command));
+            Task.Run(() => commandHandler.Handle(command));
         }
 
         #endregion
