@@ -141,6 +141,11 @@ namespace SmokeLounge.AOtomation.Domain.Entities
 
         protected virtual void Start()
         {
+            if (this.client == null)
+            {
+                throw new InvalidOperationException();
+            }
+
             this.client.Start();
         }
 

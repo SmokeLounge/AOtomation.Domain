@@ -36,6 +36,7 @@ namespace SmokeLounge.AOtomation.Domain.Facade
         public TriggerCommandService(ICommandManager commandManager)
         {
             Contract.Requires<ArgumentNullException>(commandManager != null);
+
             this.commandManager = commandManager;
         }
 

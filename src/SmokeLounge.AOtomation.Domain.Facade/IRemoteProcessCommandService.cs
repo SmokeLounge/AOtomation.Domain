@@ -14,7 +14,33 @@
 
 namespace SmokeLounge.AOtomation.Domain.Facade
 {
+    using System;
+    using System.Diagnostics.Contracts;
+
+    using SmokeLounge.AOtomation.Domain.Interfaces.Commands;
+
+    [ContractClass(typeof(IRemoteProcessCommandServiceContract))]
     public interface IRemoteProcessCommandService
     {
+        #region Public Methods and Operators
+
+        void AttachClientToRemoteProcess(AttachClientToRemoteProcessCommand command);
+
+        #endregion
+    }
+
+    [ContractClassFor(typeof(IRemoteProcessCommandService))]
+    internal abstract class IRemoteProcessCommandServiceContract : IRemoteProcessCommandService
+    {
+        #region Public Methods and Operators
+
+        public void AttachClientToRemoteProcess(AttachClientToRemoteProcessCommand command)
+        {
+            Contract.Requires<ArgumentNullException>(command != null);
+
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
