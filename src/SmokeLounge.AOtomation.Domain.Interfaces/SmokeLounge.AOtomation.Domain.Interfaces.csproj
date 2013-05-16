@@ -131,7 +131,9 @@
     <Compile Include="Commands\DeleteRemoteProcessCommand.cs" />
     <Compile Include="Commands\Parameters\GameAction.cs" />
     <Compile Include="Commands\Parameters\SendMessageAction.cs" />
-    <Compile Include="Events\PlayerForRemoteProcessFoundEvent.cs" />
+    <Compile Include="Events\PacketReceivedEvent.cs" />
+    <Compile Include="Events\PacketSentEvent.cs" />
+    <Compile Include="Events\ProcessPlayerChangedEvent.cs" />
     <Compile Include="Events\ClientAttachedToProcessEvent.cs" />
     <Compile Include="Events\MessageTriggerAddedToRemoteProcessEvent.cs" />
     <Compile Include="Events\RemoteProcessCreatedEvent.cs" />

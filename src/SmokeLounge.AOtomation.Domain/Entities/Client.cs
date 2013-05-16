@@ -58,9 +58,9 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             }
         }
 
-        public Action<MessageBody, Action> ReceiveCallback { get; set; }
+        public Action<Message, byte[], Action> ReceiveCallback { get; set; }
 
-        public Action<MessageBody, Action> SendCallback { get; set; }
+        public Action<Message, byte[], Action> SendCallback { get; set; }
 
         #endregion
 
@@ -84,15 +84,18 @@ namespace SmokeLounge.AOtomation.Domain.Entities
                 n3Message.Identity = clientId;
             }
 
-            var header = new Header();
-            header.PacketType = message.PacketType;
-            header.Receiver = 2;
-            header.Sender = clientId.Instance;
-
+            var header = new Header { PacketType = message.PacketType, Receiver = 2, Sender = clientId.Instance };
             var envelope = new Message { Header = header, Body = message };
+
             this.messageSerializer.Serialize(memoryStream, envelope);
             var packet = memoryStream.ToArray();
             this.Send(packet);
+            if (this.SendCallback == null)
+            {
+                return;
+            }
+
+            this.SendCallback(envelope, packet, () => { });
         }
 
         public void Send(byte[] message)
@@ -135,14 +138,8 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             }
 
             var message = this.messageSerializer.Deserialize(new MemoryStream(packet));
-            if (message == null)
-            {
-                resumeHook();
-                return;
-            }
-
             Contract.Assume(this.ReceiveCallback != null);
-            this.ReceiveCallback(message.Body, resumeHook);
+            this.ReceiveCallback(message, packet, resumeHook);
         }
 
         private void OnSendCallback(byte[] packet, Action resumeHook)
@@ -161,14 +158,8 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             }
 
             var message = this.messageSerializer.Deserialize(new MemoryStream(packet));
-            if (message == null)
-            {
-                resumeHook();
-                return;
-            }
-
             Contract.Assume(this.SendCallback != null);
-            this.SendCallback(message.Body, resumeHook);
+            this.SendCallback(message, packet, resumeHook);
         }
 
         #endregion

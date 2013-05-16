@@ -90,6 +90,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
                 return;
             }
 
+            this.playerRepository.Add(player);
             remoteProcess.SetPlayer(player);
         }
 

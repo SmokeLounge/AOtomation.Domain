@@ -132,7 +132,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
         public void SetPlayer(IPlayer player)
         {
             this.player = player;
-            this.events.Publish(new PlayerForRemoteProcessFoundEvent(this.Id, this.player.Id));
+            this.events.Publish(new ProcessPlayerChangedEvent(this.Id, this.player.Id));
         }
 
         #endregion
@@ -157,24 +157,38 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             Contract.Invariant(this.triggers != null);
         }
 
-        private void OnReceiveCallback(MessageBody message, Action resumeHook)
+        private void OnReceiveCallback(Message message, byte[] packet, Action resumeHook)
         {
-            Contract.Requires(message != null);
+            Contract.Requires(packet != null);
             Contract.Requires(resumeHook != null);
             Contract.Requires(this.client != null);
             Contract.Requires(this.actionExecutionContext != null);
 
-            this.triggerHandler.ExecuteTriggerActions(message, resumeHook, this.actionExecutionContext);
+            this.events.Publish(new PacketReceivedEvent(this.id, packet));
+
+            if (message == null || message.Body == null)
+            {
+                return;
+            }
+
+            this.triggerHandler.ExecuteTriggerActions(message.Body, resumeHook, this.actionExecutionContext);
         }
 
-        private void OnSendCallback(MessageBody message, Action resumeHook)
+        private void OnSendCallback(Message message, byte[] packet, Action resumeHook)
         {
-            Contract.Requires(message != null);
+            Contract.Requires(packet != null);
             Contract.Requires(resumeHook != null);
             Contract.Requires(this.client != null);
             Contract.Requires(this.actionExecutionContext != null);
 
-            this.triggerHandler.ExecuteTriggerActions(message, resumeHook, this.actionExecutionContext);
+            if (message == null || message.Body == null)
+            {
+                this.events.Publish(new PacketSentEvent(this.id, packet));
+                return;
+            }
+
+            this.triggerHandler.ExecuteTriggerActions(message.Body, resumeHook, this.actionExecutionContext);
+            this.events.Publish(new PacketSentEvent(this.id, packet));
         }
 
         #endregion

@@ -27,9 +27,9 @@ namespace SmokeLounge.AOtomation.Domain.Entities
 
         Guid Id { get; }
 
-        Action<MessageBody, Action> ReceiveCallback { get; set; }
+        Action<Message, byte[], Action> ReceiveCallback { get; set; }
 
-        Action<MessageBody, Action> SendCallback { get; set; }
+        Action<Message, byte[], Action> SendCallback { get; set; }
 
         #endregion
 
@@ -57,9 +57,9 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             }
         }
 
-        public Action<MessageBody, Action> ReceiveCallback { get; set; }
+        public Action<Message, byte[], Action> ReceiveCallback { get; set; }
 
-        public Action<MessageBody, Action> SendCallback { get; set; }
+        public Action<Message, byte[], Action> SendCallback { get; set; }
 
         #endregion
 

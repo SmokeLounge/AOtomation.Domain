@@ -155,7 +155,7 @@
     <Compile Include="Entities\Actions\SendMessageAction.cs" />
     <Compile Include="Entities\Triggers\Trigger.cs" />
     <Compile Include="EventHandlers\RemoteProcessCreatedEventHandler.cs" />
-    <Compile Include="EventHandlers\PlayerForRemoteProcessFoundEventHandler.cs" />
+    <Compile Include="EventHandlers\ProcessPlayerChangedEventHandler.cs" />
     <Compile Include="EventHandlers\ClientAttachedToProcessEventHandler.cs" />
     <Compile Include="EventHandlers\MessageTriggerAddedToRemoteProcessEvent.cs" />
     <Compile Include="Factories\ActionExecutionContextFactory.cs" />

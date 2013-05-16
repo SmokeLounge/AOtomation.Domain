@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PlayerForRemoteProcessFoundEvent.cs" company="SmokeLounge">
+// <copyright file="ProcessPlayerChangedEvent.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the PlayerForRemoteProcessFoundEvent type.
+//   Defines the ProcessPlayerChangedEvent type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ namespace SmokeLounge.AOtomation.Domain.Interfaces.Events
 {
     using System;
 
-    public class PlayerForRemoteProcessFoundEvent
+    public class ProcessPlayerChangedEvent
     {
         #region Fields
 
@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Domain.Interfaces.Events
 
         #region Constructors and Destructors
 
-        public PlayerForRemoteProcessFoundEvent(Guid remoteProcessId, Guid playerId)
+        public ProcessPlayerChangedEvent(Guid remoteProcessId, Guid playerId)
         {
             this.remoteProcessId = remoteProcessId;
             this.playerId = playerId;

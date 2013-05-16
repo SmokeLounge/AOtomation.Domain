@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PlayerForRemoteProcessFoundEventHandler.cs" company="SmokeLounge">
+// <copyright file="ProcessPlayerChangedEventHandler.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the PlayerForRemoteProcessFoundEventHandler type.
+//   Defines the ProcessPlayerChangedEventHandler type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -18,12 +18,12 @@ namespace SmokeLounge.AOtomation.Domain.EventHandlers
     using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Domain.Interfaces.Events;
 
-    [ExportEventHandler(typeof(PlayerForRemoteProcessFoundEvent))]
-    public class PlayerForRemoteProcessFoundEventHandler : IHandleDomainEvent<PlayerForRemoteProcessFoundEvent>
+    [ExportEventHandler(typeof(ProcessPlayerChangedEvent))]
+    public class ProcessPlayerChangedEventHandler : IHandleDomainEvent<ProcessPlayerChangedEvent>
     {
         #region Public Methods and Operators
 
-        public void Handle(PlayerForRemoteProcessFoundEvent message)
+        public void Handle(ProcessPlayerChangedEvent message)
         {
         }
 
