@@ -45,6 +45,8 @@ namespace SmokeLounge.AOtomation.Domain.Interfaces.Events
         {
             get
             {
+                Contract.Ensures(Contract.Result<byte[]>() != null);
+
                 return this.packet;
             }
         }
