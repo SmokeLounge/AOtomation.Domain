@@ -15,6 +15,7 @@
 namespace SmokeLounge.AOtomation.Domain.Entities
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Text;
@@ -42,6 +43,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
         {
             Contract.Requires<ArgumentNullException>(clientConnection != null);
             Contract.Requires<ArgumentNullException>(messageSerializer != null);
+
             this.clientConnection = clientConnection;
             this.messageSerializer = messageSerializer;
         }
@@ -77,7 +79,6 @@ namespace SmokeLounge.AOtomation.Domain.Entities
 
         public void Send(Identity clientId, MessageBody message)
         {
-            var memoryStream = new MemoryStream();
             var n3Message = message as N3Message;
             if (n3Message != null)
             {
@@ -87,8 +88,25 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             var header = new Header { PacketType = message.PacketType, Receiver = 2, Sender = clientId.Instance };
             var envelope = new Message { Header = header, Body = message };
 
-            this.messageSerializer.Serialize(memoryStream, envelope);
-            var packet = memoryStream.ToArray();
+            byte[] packet = null;
+            try
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    this.messageSerializer.Serialize(memoryStream, envelope);
+                    packet = memoryStream.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+            if (packet == null)
+            {
+                return;
+            }
+
             this.Send(packet);
             if (this.SendCallback == null)
             {
@@ -115,6 +133,25 @@ namespace SmokeLounge.AOtomation.Domain.Entities
 
         #region Methods
 
+        private Message Deserialize(byte[] packet)
+        {
+            Contract.Requires(packet != null);
+
+            try
+            {
+                using (var memoryStream = new MemoryStream(packet))
+                {
+                    var message = this.messageSerializer.Deserialize(memoryStream);
+                    return message;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
@@ -137,7 +174,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
                 return;
             }
 
-            var message = this.messageSerializer.Deserialize(new MemoryStream(packet));
+            var message = this.Deserialize(packet);
             Contract.Assume(this.ReceiveCallback != null);
             this.ReceiveCallback(message, packet, resumeHook);
         }
@@ -157,7 +194,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
                 return;
             }
 
-            var message = this.messageSerializer.Deserialize(new MemoryStream(packet));
+            var message = this.Deserialize(packet);
             Contract.Assume(this.SendCallback != null);
             this.SendCallback(message, packet, resumeHook);
         }
