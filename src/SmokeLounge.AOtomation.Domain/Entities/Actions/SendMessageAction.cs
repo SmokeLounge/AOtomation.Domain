@@ -19,7 +19,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities.Actions
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using SmokeLounge.AOtomation.Common;
+    using SmokeLounge.AOtomation.AutoFactory;
     using SmokeLounge.AOtomation.Domain.Entities.Triggers;
     using SmokeLounge.AOtomation.Messaging.Messages;
 

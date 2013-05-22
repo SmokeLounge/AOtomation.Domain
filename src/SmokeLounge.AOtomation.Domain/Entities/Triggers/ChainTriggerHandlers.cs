@@ -19,7 +19,6 @@ namespace SmokeLounge.AOtomation.Domain.Entities.Triggers
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using SmokeLounge.AOtomation.Common;
     using SmokeLounge.AOtomation.Domain.Factories;
     using SmokeLounge.AOtomation.Messaging.Messages;
 
@@ -63,9 +62,17 @@ namespace SmokeLounge.AOtomation.Domain.Entities.Triggers
                                    select trigger;
             var triggersToExecute = triggersToHandle.ToArray();
 
-            triggersToExecute.ForEach(t => t.ExecuteBefore(context));
+            foreach (var messageTrigger in triggersToExecute)
+            {
+                messageTrigger.ExecuteBefore(context);
+            }
+
             resumeHook();
-            triggersToExecute.ForEach(t => t.ExecuteAfter(context));
+
+            foreach (var messageTrigger in triggersToExecute)
+            {
+                messageTrigger.ExecuteAfter(context);
+            }
         }
 
         #endregion
