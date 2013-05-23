@@ -7,3 +7,6 @@
 [submodule "lib/SmokeLounge.AOtomation.AutoFactory"]
 	path = lib/SmokeLounge.AOtomation.AutoFactory
 	url = https://github.com/SmokeLounge/AOtomation.AutoFactory.git
+[submodule "lib/SmokeLounge.AOtomation.Bus"]
+	path = lib/SmokeLounge.AOtomation.Bus
+	url = https://github.com/SmokeLounge/AOtomation.Bus.git
