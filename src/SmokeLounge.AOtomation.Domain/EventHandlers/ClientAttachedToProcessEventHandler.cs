@@ -18,12 +18,12 @@ namespace SmokeLounge.AOtomation.Domain.EventHandlers
     using System.ComponentModel.Composition;
     using System.Diagnostics.Contracts;
 
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Infrastructure;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Domain.Interfaces.Events;
 
-    [ExportEventHandler(typeof(ClientAttachedToProcessEvent))]
-    public class ClientAttachedToProcessEventHandler : IHandleDomainEvent<ClientAttachedToProcessEvent>
+    [ExportMessageHandler(typeof(ClientAttachedToProcessEvent))]
+    public class ClientAttachedToProcessEventHandler : IHandleMessage<ClientAttachedToProcessEvent>
     {
         #region Fields
 

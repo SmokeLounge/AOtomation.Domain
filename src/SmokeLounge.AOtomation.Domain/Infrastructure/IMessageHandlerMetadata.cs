@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IEventHandlerMetadata.cs" company="SmokeLounge">
+// <copyright file="IMessageHandlerMetadata.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the IEventHandlerMetadata type.
+//   Defines the IMessageHandlerMetadata type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
 {
     using System;
 
-    public interface IEventHandlerMetadata
+    public interface IMessageHandlerMetadata
     {
         #region Public Properties
 

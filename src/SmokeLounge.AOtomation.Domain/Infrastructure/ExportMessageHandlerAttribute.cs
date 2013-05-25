@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExportEventHandlerAttribute.cs" company="SmokeLounge">
+// <copyright file="ExportMessageHandlerAttribute.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the ExportEventHandlerAttribute type.
+//   Defines the ExportMessageHandlerAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -17,11 +17,11 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
     using System;
     using System.ComponentModel.Composition;
 
-    using SmokeLounge.AOtomation.Domain.Interfaces;
+    using SmokeLounge.AOtomation.Bus;
 
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class ExportEventHandlerAttribute : ExportAttribute
+    public class ExportMessageHandlerAttribute : ExportAttribute
     {
         #region Fields
 
@@ -31,8 +31,8 @@ namespace SmokeLounge.AOtomation.Domain.Infrastructure
 
         #region Constructors and Destructors
 
-        public ExportEventHandlerAttribute(Type handlesEvent)
-            : base(typeof(IHandleDomainEvent))
+        public ExportMessageHandlerAttribute(Type handlesEvent)
+            : base(typeof(IHandleMessage))
         {
             this.handlesEvent = handlesEvent;
         }

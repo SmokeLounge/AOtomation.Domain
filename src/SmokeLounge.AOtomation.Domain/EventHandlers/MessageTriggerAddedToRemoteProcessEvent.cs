@@ -14,12 +14,12 @@
 
 namespace SmokeLounge.AOtomation.Domain.EventHandlers
 {
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Infrastructure;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
 
-    [ExportEventHandler(typeof(Interfaces.Events.MessageTriggerAddedToRemoteProcessEvent))]
+    [ExportMessageHandler(typeof(Interfaces.Events.MessageTriggerAddedToRemoteProcessEvent))]
     public class MessageTriggerAddedToRemoteProcessEvent :
-        IHandleDomainEvent<Interfaces.Events.MessageTriggerAddedToRemoteProcessEvent>
+        IHandleMessage<Interfaces.Events.MessageTriggerAddedToRemoteProcessEvent>
     {
         #region Public Methods and Operators
 

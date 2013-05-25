@@ -14,12 +14,12 @@
 
 namespace SmokeLounge.AOtomation.Domain.EventHandlers
 {
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Infrastructure;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Domain.Interfaces.Events;
 
-    [ExportEventHandler(typeof(ProcessPlayerChangedEvent))]
-    public class ProcessPlayerChangedEventHandler : IHandleDomainEvent<ProcessPlayerChangedEvent>
+    [ExportMessageHandler(typeof(ProcessPlayerChangedEvent))]
+    public class ProcessPlayerChangedEventHandler : IHandleMessage<ProcessPlayerChangedEvent>
     {
         #region Public Methods and Operators
 

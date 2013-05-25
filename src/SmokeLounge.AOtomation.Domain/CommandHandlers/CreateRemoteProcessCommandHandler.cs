@@ -18,6 +18,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
     using System.ComponentModel.Composition;
     using System.Diagnostics.Contracts;
 
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Factories;
     using SmokeLounge.AOtomation.Domain.Infrastructure;
     using SmokeLounge.AOtomation.Domain.Interfaces;
@@ -31,7 +32,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
     {
         #region Fields
 
-        private readonly IDomainEventAggregator events;
+        private readonly IBus bus;
 
         private readonly IRemoteProcessFactory remoteProcessFactory;
 
@@ -45,17 +46,17 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
 
         [ImportingConstructor]
         public CreateRemoteProcessCommandHandler(
-            IDomainEventAggregator events, 
+            IBus bus, 
             IWin32ProcessRepository win32ProcessRepository, 
             IRemoteProcessFactory remoteProcessFactory, 
             IRemoteProcessRepository remoteProcessRepository)
         {
-            Contract.Requires<ArgumentNullException>(events != null);
+            Contract.Requires<ArgumentNullException>(bus != null);
             Contract.Requires<ArgumentNullException>(win32ProcessRepository != null);
             Contract.Requires<ArgumentNullException>(remoteProcessFactory != null);
             Contract.Requires<ArgumentNullException>(remoteProcessRepository != null);
 
-            this.events = events;
+            this.bus = bus;
             this.win32ProcessRepository = win32ProcessRepository;
             this.remoteProcessFactory = remoteProcessFactory;
             this.remoteProcessRepository = remoteProcessRepository;
@@ -80,7 +81,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
             }
 
             this.remoteProcessRepository.Add(remoteProcess);
-            this.events.Publish(new RemoteProcessCreatedEvent(remoteProcess.Id));
+            this.bus.Publish(new RemoteProcessCreatedEvent(remoteProcess.Id));
         }
 
         public void Handle(ICommand command)
@@ -95,7 +96,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(this.events != null);
+            Contract.Invariant(this.bus != null);
             Contract.Invariant(this.win32ProcessRepository != null);
             Contract.Invariant(this.remoteProcessFactory != null);
             Contract.Invariant(this.remoteProcessRepository != null);

@@ -18,9 +18,9 @@ namespace SmokeLounge.AOtomation.Domain.Factories
     using System.ComponentModel.Composition;
     using System.Diagnostics.Contracts;
 
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Entities;
     using SmokeLounge.AOtomation.Domain.Entities.Triggers;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Hook;
 
     [Export(typeof(IRemoteProcessFactory))]
@@ -28,21 +28,22 @@ namespace SmokeLounge.AOtomation.Domain.Factories
     {
         #region Fields
 
-        private readonly IChainTriggerHandlers chainTriggerHandlers;
+        private readonly IBus bus;
 
-        private readonly IDomainEventAggregator events;
+        private readonly IChainTriggerHandlers chainTriggerHandlers;
 
         #endregion
 
         #region Constructors and Destructors
 
         [ImportingConstructor]
-        public RemoteProcessFactory(IChainTriggerHandlers chainTriggerHandlers, IDomainEventAggregator events)
+        public RemoteProcessFactory(IChainTriggerHandlers chainTriggerHandlers, IBus bus)
         {
             Contract.Requires<ArgumentNullException>(chainTriggerHandlers != null);
-            Contract.Requires<ArgumentNullException>(events != null);
+            Contract.Requires<ArgumentNullException>(bus != null);
+
             this.chainTriggerHandlers = chainTriggerHandlers;
-            this.events = events;
+            this.bus = bus;
         }
 
         #endregion
@@ -51,7 +52,7 @@ namespace SmokeLounge.AOtomation.Domain.Factories
 
         public IRemoteProcess Create(IWin32Process win32Process)
         {
-            return new RemoteProcess(win32Process, this.chainTriggerHandlers, this.events);
+            return new RemoteProcess(win32Process, this.chainTriggerHandlers, this.bus);
         }
 
         #endregion
@@ -62,7 +63,7 @@ namespace SmokeLounge.AOtomation.Domain.Factories
         private void ObjectInvariant()
         {
             Contract.Invariant(this.chainTriggerHandlers != null);
-            Contract.Invariant(this.events != null);
+            Contract.Invariant(this.bus != null);
         }
 
         #endregion

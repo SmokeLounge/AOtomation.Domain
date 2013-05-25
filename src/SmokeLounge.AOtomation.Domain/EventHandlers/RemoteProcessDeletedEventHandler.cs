@@ -14,12 +14,12 @@
 
 namespace SmokeLounge.AOtomation.Domain.EventHandlers
 {
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Infrastructure;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Domain.Interfaces.Events;
 
-    [ExportEventHandler(typeof(RemoteProcessDeletedEvent))]
-    public class RemoteProcessDeletedEventHandler : IHandleDomainEvent<RemoteProcessDeletedEvent>
+    [ExportMessageHandler(typeof(RemoteProcessDeletedEvent))]
+    public class RemoteProcessDeletedEventHandler : IHandleMessage<RemoteProcessDeletedEvent>
     {
         #region Public Methods and Operators
 

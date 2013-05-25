@@ -139,8 +139,6 @@
     <Compile Include="Events\RemoteProcessCreatedEvent.cs" />
     <Compile Include="Events\RemoteProcessDeletedEvent.cs" />
     <Compile Include="ICommand.cs" />
-    <Compile Include="IDomainEventAggregator.cs" />
-    <Compile Include="IHandleDomainEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

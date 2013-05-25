@@ -18,8 +18,8 @@ namespace SmokeLounge.AOtomation.Domain.Entities
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Entities.Triggers;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Domain.Interfaces.Events;
     using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Messages;
@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
     {
         #region Fields
 
-        private readonly IDomainEventAggregator events;
+        private readonly IBus bus;
 
         private readonly Guid id = Guid.NewGuid();
 
@@ -46,12 +46,12 @@ namespace SmokeLounge.AOtomation.Domain.Entities
 
         #region Constructors and Destructors
 
-        protected Process(IChainTriggerHandlers triggerHandler, IDomainEventAggregator events)
+        protected Process(IChainTriggerHandlers triggerHandler, IBus bus)
         {
             Contract.Requires<ArgumentNullException>(triggerHandler != null);
-            Contract.Requires<ArgumentNullException>(events != null);
+            Contract.Requires<ArgumentNullException>(bus != null);
             this.triggerHandler = triggerHandler;
-            this.events = events;
+            this.bus = bus;
 
             this.triggers = new List<ITrigger>();
         }
@@ -105,7 +105,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
         public void AddTrigger(ITrigger trigger)
         {
             this.triggers.Add(trigger);
-            this.events.Publish(new MessageTriggerAddedToRemoteProcessEvent(this.Id, trigger.Id));
+            this.bus.Publish(new MessageTriggerAddedToRemoteProcessEvent(this.Id, trigger.Id));
         }
 
         public void AttachClient(IClient client)
@@ -114,7 +114,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             this.client.SendCallback = this.OnSendCallback;
             this.client.ReceiveCallback = this.OnReceiveCallback;
             this.actionExecutionContext = this.triggerHandler.CreateContext(this);
-            this.events.Publish(new ClientAttachedToProcessEvent(this.Id, this.client.Id));
+            this.bus.Publish(new ClientAttachedToProcessEvent(this.Id, this.client.Id));
             this.Start();
         }
 
@@ -132,7 +132,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
         public void SetPlayer(IPlayer player)
         {
             this.player = player;
-            this.events.Publish(new ProcessPlayerChangedEvent(this.Id, this.player.Id));
+            this.bus.Publish(new ProcessPlayerChangedEvent(this.Id, this.player.Id));
         }
 
         #endregion
@@ -153,7 +153,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
         private void ObjectInvariant()
         {
             Contract.Invariant(this.triggerHandler != null);
-            Contract.Invariant(this.events != null);
+            Contract.Invariant(this.bus != null);
             Contract.Invariant(this.triggers != null);
         }
 
@@ -164,7 +164,7 @@ namespace SmokeLounge.AOtomation.Domain.Entities
             Contract.Requires(this.client != null);
             Contract.Requires(this.actionExecutionContext != null);
 
-            this.events.Publish(new PacketReceivedEvent(this.id, packet));
+            this.bus.Publish(new PacketReceivedEvent(this.id, packet));
 
             if (message == null || message.Body == null)
             {
@@ -183,12 +183,12 @@ namespace SmokeLounge.AOtomation.Domain.Entities
 
             if (message == null || message.Body == null)
             {
-                this.events.Publish(new PacketSentEvent(this.id, packet));
+                this.bus.Publish(new PacketSentEvent(this.id, packet));
                 return;
             }
 
             this.triggerHandler.ExecuteTriggerActions(message.Body, resumeHook, this.actionExecutionContext);
-            this.events.Publish(new PacketSentEvent(this.id, packet));
+            this.bus.Publish(new PacketSentEvent(this.id, packet));
         }
 
         #endregion

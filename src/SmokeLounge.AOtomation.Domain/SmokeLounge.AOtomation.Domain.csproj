@@ -169,17 +169,16 @@
     <Compile Include="Factories\IClientFactory.cs" />
     <Compile Include="Factories\SendMessageActionFactory.cs" />
     <Compile Include="Infrastructure\CommandManager.cs" />
-    <Compile Include="Infrastructure\DomainEventAggregator.cs" />
     <Compile Include="EventHandlers\RemoteProcessDeletedEventHandler.cs" />
     <Compile Include="Factories\IRemoteProcessFactory.cs" />
     <Compile Include="Factories\RemoteProcessFactory.cs" />
     <Compile Include="Infrastructure\ExportCommandHandlerAttribute.cs" />
-    <Compile Include="Infrastructure\ExportEventHandlerAttribute.cs" />
+    <Compile Include="Infrastructure\ExportMessageHandlerAttribute.cs" />
     <Compile Include="Infrastructure\ExportStartupTaskAttribute.cs" />
     <Compile Include="Infrastructure\ICommandHandler.cs" />
     <Compile Include="Infrastructure\ICommandHandlerMetadata.cs" />
     <Compile Include="Infrastructure\ICommandManager.cs" />
-    <Compile Include="Infrastructure\IEventHandlerMetadata.cs" />
+    <Compile Include="Infrastructure\IMessageHandlerMetadata.cs" />
     <Compile Include="Infrastructure\IStartupTaskMetadata.cs" />
     <Compile Include="Interoperability\IMemoryManager.cs" />
     <Compile Include="Interoperability\IMessageSerializer.cs" />
@@ -209,6 +208,10 @@
     <ProjectReference Include="..\..\lib\SmokeLounge.AOtomation.AutoFactory\src\SmokeLounge.AOtomation.AutoFactory\SmokeLounge.AOtomation.AutoFactory.csproj">
       <Project>{772F2183-7F21-46E1-99F0-3C26811D5BC8}</Project>
       <Name>SmokeLounge.AOtomation.AutoFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\SmokeLounge.AOtomation.Bus\src\SmokeLounge.AOtomation.Bus\SmokeLounge.AOtomation.Bus.csproj">
+      <Project>{6E075BFF-46BC-43A5-A3CA-176A9F0DD1F0}</Project>
+      <Name>SmokeLounge.AOtomation.Bus</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmokeLounge.AOtomation.Domain.Interfaces\SmokeLounge.AOtomation.Domain.Interfaces.csproj">
       <Project>{f7accfa0-a898-444b-abfa-5a920945f52b}</Project>

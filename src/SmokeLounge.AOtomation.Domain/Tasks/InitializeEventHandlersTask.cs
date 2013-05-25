@@ -20,17 +20,17 @@ namespace SmokeLounge.AOtomation.Domain.Tasks
     using System.Diagnostics.Contracts;
     using System.Linq;
 
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Infrastructure;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
 
     [ExportStartupTask(Priority = 10)]
     public class InitializeEventHandlersTask : IInitializeEventHandlersTask
     {
         #region Fields
 
-        private readonly IEnumerable<Lazy<IHandleDomainEvent, IEventHandlerMetadata>> eventHandlers;
+        private readonly IBus bus;
 
-        private readonly IDomainEventAggregator events;
+        private readonly IEnumerable<Lazy<IHandleMessage, IMessageHandlerMetadata>> eventHandlers;
 
         #endregion
 
@@ -38,13 +38,12 @@ namespace SmokeLounge.AOtomation.Domain.Tasks
 
         [ImportingConstructor]
         public InitializeEventHandlersTask(
-            IDomainEventAggregator events, 
-            [ImportMany] IEnumerable<Lazy<IHandleDomainEvent, IEventHandlerMetadata>> eventHandlers)
+            IBus bus, [ImportMany] IEnumerable<Lazy<IHandleMessage, IMessageHandlerMetadata>> eventHandlers)
         {
-            Contract.Requires<ArgumentNullException>(events != null);
+            Contract.Requires<ArgumentNullException>(bus != null);
             Contract.Requires<ArgumentNullException>(eventHandlers != null);
 
-            this.events = events;
+            this.bus = bus;
             this.eventHandlers = eventHandlers;
         }
 
@@ -57,7 +56,7 @@ namespace SmokeLounge.AOtomation.Domain.Tasks
             foreach (var eventHandler in this.eventHandlers.Where(e => e.Value != null).Select(e => e.Value))
             {
                 Contract.Assume(eventHandler != null);
-                this.events.Subscribe(eventHandler);
+                this.bus.Subscribe(eventHandler);
             }
         }
 
@@ -68,7 +67,7 @@ namespace SmokeLounge.AOtomation.Domain.Tasks
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(this.events != null);
+            Contract.Invariant(this.bus != null);
             Contract.Invariant(this.eventHandlers != null);
         }
 

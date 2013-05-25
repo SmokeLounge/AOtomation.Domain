@@ -18,6 +18,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
     using System.ComponentModel.Composition;
     using System.Diagnostics.Contracts;
 
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Infrastructure;
     using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Domain.Interfaces.Commands;
@@ -29,7 +30,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
     {
         #region Fields
 
-        private readonly IDomainEventAggregator events;
+        private readonly IBus bus;
 
         private readonly IRemoteProcessRepository remoteProcessRepository;
 
@@ -38,12 +39,11 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
         #region Constructors and Destructors
 
         [ImportingConstructor]
-        public DeleteRemoteProcessCommandHandler(
-            IDomainEventAggregator events, IRemoteProcessRepository remoteProcessRepository)
+        public DeleteRemoteProcessCommandHandler(IBus bus, IRemoteProcessRepository remoteProcessRepository)
         {
-            Contract.Requires<ArgumentNullException>(events != null);
+            Contract.Requires<ArgumentNullException>(bus != null);
             Contract.Requires<ArgumentNullException>(remoteProcessRepository != null);
-            this.events = events;
+            this.bus = bus;
             this.remoteProcessRepository = remoteProcessRepository;
         }
 
@@ -60,7 +60,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
             }
 
             this.remoteProcessRepository.Delete(remoteProcess);
-            this.events.Publish(new RemoteProcessDeletedEvent(command.RemoteProcessId));
+            this.bus.Publish(new RemoteProcessDeletedEvent(command.RemoteProcessId));
         }
 
         public void Handle(ICommand command)
@@ -75,7 +75,7 @@ namespace SmokeLounge.AOtomation.Domain.CommandHandlers
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(this.events != null);
+            Contract.Invariant(this.bus != null);
             Contract.Invariant(this.remoteProcessRepository != null);
         }
 

@@ -18,8 +18,8 @@ namespace SmokeLounge.AOtomation.Domain.Entities
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
+    using SmokeLounge.AOtomation.Bus;
     using SmokeLounge.AOtomation.Domain.Entities.Triggers;
-    using SmokeLounge.AOtomation.Domain.Interfaces;
     using SmokeLounge.AOtomation.Hook;
 
     public class RemoteProcess : Process, IRemoteProcess
@@ -32,13 +32,12 @@ namespace SmokeLounge.AOtomation.Domain.Entities
 
         #region Constructors and Destructors
 
-        public RemoteProcess(
-            IWin32Process win32Process, IChainTriggerHandlers triggerHandler, IDomainEventAggregator events)
-            : base(triggerHandler, events)
+        public RemoteProcess(IWin32Process win32Process, IChainTriggerHandlers triggerHandler, IBus bus)
+            : base(triggerHandler, bus)
         {
             Contract.Requires<ArgumentNullException>(win32Process != null);
             Contract.Requires<ArgumentNullException>(triggerHandler != null);
-            Contract.Requires<ArgumentNullException>(events != null);
+            Contract.Requires<ArgumentNullException>(bus != null);
             this.win32Process = win32Process;
         }
 
